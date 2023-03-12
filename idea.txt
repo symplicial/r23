@@ -1,0 +1,10 @@
+Game Idea:
+
+A roguelike shooter in space with elements of horror. Your species (bug people or something) has exhausted the rare resources of your galaxy and is sending scavengers to other galaxies in order to fetch rare resources. Your job is to go to a galaxy whose species died out and recover devices used to produce artificial gravity on asteroid mining operations (maybe other things too). You arrive with only a pistol (this is all that your galaxy allows you to have) and must reach the core of the asteroid, where the gravity device is. It is on when you arrive, so you experience gravity, but maybe not Earth gravity, since the species using this asteroid might've preferred something else. Then you need to fight through hordes of aliens, perhaps randomly generated, in the mining facility, descending level by level, until you get to the core. There are also a few spooky big bosses. Once you retrieve the device, power is cut off, so you no longer have gravity. Then, you have to ascend to the surface and fight your way back.
+
+Ideas:
+- Projectile instead of hitscan weapons, might make combat more intersting or difficult.
+- Items, modifications, upgrades, etc. for guns.
+- Buying cosmetics or other unlocks based on reward for completing the mission.
+- Traveling between galaxies will cause a lot of time to have passed when you get back due to relativity. Might be fun to make small changes to your base to reflect this.
+- Lots of secrets like spelinkus!
