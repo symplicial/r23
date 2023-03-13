@@ -16,28 +16,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "main.h"
-#include "context.h"
 #include "log.h"
 
-int run(Platform plat) {
-  Logger logger = Logger();
-  Window mainWindow = plat.makeWindow("Test Window", 1280, 720);
-  Context ctx = Context();
+#include <chrono>
 
-  std::vector<PhysicalDevice> physicalDevices = ctx.listDevices();
-  logger.log(Info, "Found the following graphics devices:");
-  for (const PhysicalDevice &dev : physicalDevices) {
-    logger.log(Info, dev.getName());
+Logger::Logger() : out(logPath) {
+
+}
+
+Logger::~Logger() {
+  this->out.close();
+}
+
+void Logger::log(LogLevel level, std::string message) {
+  switch (level) {
+  case Info:
+    this->out << "[INFO]";
+    break;
+  case Debug:
+    this->out << "[DEBUG]";
+    break;
+  case Warning:
+    this->out << "[WARNING]";
+    break;
+  case Error:
+    this->out << "[ERROR]";
+    break;
   }
-  
-  /* TODO: Use a system to rank the devices and choose the best. */
-  logger.log(Info, "Using device: " + physicalDevices[0].getName());
-  ctx.useDevice(physicalDevices[0]);
 
-  while (mainWindow.update() == 0) {
+  auto now = std::chrono::system_clock::now();
+  std::time_t nowTime = std::chrono::system_clock::to_time_t(now);
 
-  }
-
-  return 0;
+  out << "[" << std::put_time(std::localtime(&nowTime), "%H:%M:%S") << "]";
+  out << " ";
+  out << message;
+  out << "\n";
 }

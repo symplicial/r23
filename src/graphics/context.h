@@ -16,28 +16,33 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "main.h"
-#include "context.h"
-#include "log.h"
+#pragma once
 
-int run(Platform plat) {
-  Logger logger = Logger();
-  Window mainWindow = plat.makeWindow("Test Window", 1280, 720);
-  Context ctx = Context();
+#include <string>
+#include <vector>
+#include <vulkan/vulkan.h>
 
-  std::vector<PhysicalDevice> physicalDevices = ctx.listDevices();
-  logger.log(Info, "Found the following graphics devices:");
-  for (const PhysicalDevice &dev : physicalDevices) {
-    logger.log(Info, dev.getName());
-  }
-  
-  /* TODO: Use a system to rank the devices and choose the best. */
-  logger.log(Info, "Using device: " + physicalDevices[0].getName());
-  ctx.useDevice(physicalDevices[0]);
+/* The data associated to a physical device. */
+class PhysicalDevice {
+  friend class Context;
+  VkPhysicalDevice device;
+public:
+  PhysicalDevice(VkPhysicalDevice _device);
 
-  while (mainWindow.update() == 0) {
+  std::string getName() const;
 
-  }
+  uint32_t getGraphicsQueueFamilyIndex() const;
+};
 
-  return 0;
-}
+/* A graphics context. */
+class Context {
+  VkInstance instance;
+  VkDevice device;
+public:
+  Context();
+  ~Context();
+
+  std::vector<PhysicalDevice> listDevices() const;
+
+  void useDevice(PhysicalDevice dev);
+};

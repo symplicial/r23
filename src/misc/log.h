@@ -16,28 +16,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "main.h"
-#include "context.h"
-#include "log.h"
+#pragma once
 
-int run(Platform plat) {
-  Logger logger = Logger();
-  Window mainWindow = plat.makeWindow("Test Window", 1280, 720);
-  Context ctx = Context();
+#include <fstream>
+#include <string>
 
-  std::vector<PhysicalDevice> physicalDevices = ctx.listDevices();
-  logger.log(Info, "Found the following graphics devices:");
-  for (const PhysicalDevice &dev : physicalDevices) {
-    logger.log(Info, dev.getName());
-  }
-  
-  /* TODO: Use a system to rank the devices and choose the best. */
-  logger.log(Info, "Using device: " + physicalDevices[0].getName());
-  ctx.useDevice(physicalDevices[0]);
+const std::string logPath = "log.txt";
 
-  while (mainWindow.update() == 0) {
+enum LogLevel {
+  Info,
+  Debug,
+  Warning,
+  Error
+};
 
-  }
+class Logger {
+  std::ofstream out;
+public:
+  Logger();
+  ~Logger();
 
-  return 0;
-}
+  void log(LogLevel level, std::string message);
+};

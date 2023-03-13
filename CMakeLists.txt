@@ -11,3 +11,6 @@ if(WIN32)
 endif(WIN32)
 
 add_subdirectory(src)
+
+find_package(Vulkan REQUIRED)
+target_link_libraries(r23 PRIVATE Vulkan::Vulkan)
