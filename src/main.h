@@ -16,14 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "main.h"
+#pragma once
 
-int run(Platform plat) {
-  Window mainWindow = plat.makeWindow("Test Window", 1280, 720);
+#include "platform.h"
 
-  while (mainWindow.update() == 0) {
-
-  }
-
-  return 0;
-}
+/* The main entry point of the program. */
+int run(Platform plat);

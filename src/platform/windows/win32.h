@@ -16,14 +16,22 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
-#include "main.h"
+#pragma once
 
-int run(Platform plat) {
-  Window mainWindow = plat.makeWindow("Test Window", 1280, 720);
+#include <windows.h>
 
-  while (mainWindow.update() == 0) {
+struct WindowData {
+  HWND hWnd;
+
+  WindowData(HWND _hWnd) : hWnd(_hWnd) {
 
   }
+};
 
-  return 0;
-}
+struct PlatformData {
+  HINSTANCE hInstance;
+
+  PlatformData(HINSTANCE _hInstance) : hInstance(_hInstance) {
+
+  }
+};
